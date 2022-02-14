@@ -14,10 +14,10 @@ import ContactForm from "../../components/ContactForm"
 import {IContactFormCallbackParams} from "../../components/ContactForm/interface"
 import Container from "../../components/Container"
 import {feedback} from "../../apollo/requests"
-import {useMutation} from "@apollo/client"
-import ProgressBar from "../../components/ProgressBar/ProgressBar";
-import {Notification} from "../../components/Notification";
-import {TINotificationType} from "../../components/Notification/interface";
+import {DocumentNode, useMutation} from "@apollo/client"
+import ProgressBar from "../../components/ProgressBar/ProgressBar"
+import {Notification} from "../../components/Notification"
+import {TINotificationType} from "../../components/Notification/interface"
 
 
 
@@ -29,7 +29,7 @@ const ContactPage: FC<IContactPage> = () => {
     const [alertType,setAlertType] = useState<TINotificationType>('success')
     const [alertMessage,setAlertMessage] = useState<string|undefined>(undefined)
 
-    //@ts-ignore
+
     const [feedbackFunc,{loading:feedbackLoading,data:feedbackData,error:feedbackErr}] = useMutation(feedback)
 
 
