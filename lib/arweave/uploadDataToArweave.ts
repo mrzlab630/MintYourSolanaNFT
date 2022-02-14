@@ -49,7 +49,7 @@ const uploadDataToArweave:IuploadFileToArweave = async function ({
             throw new Error(error || `can't start arweave agent`)
         }
 
-        const key = wallet //  await arweave.wallets.generate()
+        const key = walletKey //  await arweave.wallets.generate()
 
         const address = await arweave.wallets.jwkToAddress(key)
 
