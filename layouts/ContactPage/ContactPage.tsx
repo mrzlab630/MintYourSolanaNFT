@@ -29,11 +29,8 @@ const ContactPage: FC<IContactPage> = () => {
     const [alertType,setAlertType] = useState<TINotificationType>('success')
     const [alertMessage,setAlertMessage] = useState<string|undefined>(undefined)
 
-    const [feedbackFunc,{
-                            loading:feedbackLoading,
-                            data:feedbackData,
-                            error:feedbackErr
-                        }] = useMutation(feedback)
+    //@ts-ignore
+    const [feedbackFunc,{loading:feedbackLoading,data:feedbackData,error:feedbackErr}] = useMutation(feedback)
 
 
     useEffect(() =>{

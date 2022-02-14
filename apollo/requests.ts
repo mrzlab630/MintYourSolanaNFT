@@ -26,8 +26,7 @@ const feedback = gql`mutation Feedback(
                                 {
                                 result
                                 } 
-                                }
-`
+                                }`
 
 
 
