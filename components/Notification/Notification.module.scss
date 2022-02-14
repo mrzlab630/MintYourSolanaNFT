@@ -1,0 +1,113 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.positionLeftTop{
+  top:3%;
+  left: 3%;
+}
+.positionRightTop{
+  top:3%;
+  right: 3%;
+}
+
+.positionLeftBottom{
+  bottom:3%;
+  left: 3%;
+}
+.positionRightBottom{
+  bottom:3%;
+  right: 3%;
+}
+
+.positionTopCenter{
+  top:3%;
+  left: 45%;
+}
+.positionBottomCenter{
+  bottom:3%;
+  left: 45%;
+}
+.positionCenter{
+  top:45%;
+  left: 45%;
+}
+
+
+.error{
+  background-color: $cr-error;
+}
+
+.warning{
+  background-color: $cr-warning;
+}
+
+.info{
+  background-color: $cr-info;
+}
+
+.success{
+  background-color: $cr-success;
+}
+
+
+.NotificationWrap{
+  position: fixed;
+  width: 95%;
+  z-index: 99999;
+}
+
+.open{
+
+}
+
+.closed{
+
+}
+
+
+.Notification{
+  position: absolute;
+  z-index: 999999;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 5px -1px, rgb(0 0 0 / 14%) 0px 6px 10px 0px, rgb(0 0 0 / 12%) 0px 1px 18px 0px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11));
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  letter-spacing: 0.01071em;
+  border-radius: 4px;
+  display: flex;
+  padding: 6px 16px;
+  color: $cr-white;
+  //background-color:transparent;
+
+
+  & .title{
+    font-weight: bold;
+  }
+
+  & .body{
+    padding: 8px 0px;
+  }
+
+  & .iconWrap{
+    margin-right: 12px;
+    padding: 7px 0px;
+    display: flex;
+    font-size: 22px;
+    opacity: 0.9;
+  }
+
+  & .icon{
+    user-select: none;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    fill: currentcolor;
+    flex-shrink: 0;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    font-size: inherit;
+  }
+}

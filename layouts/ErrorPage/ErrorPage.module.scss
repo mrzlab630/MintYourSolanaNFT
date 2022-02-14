@@ -1,0 +1,55 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.ErrorPage{
+    text-align: center;
+
+& .code{
+      font-size: 10rem;
+      font-weight: 900;
+      margin: 0;
+      color: $cr-azure;
+      text-transform: uppercase;
+      letter-spacing: -.8rem;
+
+@media (min-width: $page-width-tab) {
+    font-size: 15rem;
+    letter-spacing: -1.3rem;
+}
+
+& span{
+      text-shadow: -8px 0px 0px $cr-gray-light-two;
+  }
+
+}
+
+& .title{
+      position: relative;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $cr-gray-light-two;
+      margin: 0;
+      letter-spacing: 3px;
+      padding-left: 6px;
+
+@media (min-width: $page-width-tab) {
+    font-size: 1.6rem;
+}
+}
+
+& .subText{
+      font-size: .8rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: $cr-gray-light;
+      margin-top: 0;
+      margin-bottom: 25px;
+
+@media (min-width: $page-width-tab) {
+    font-size: 1.3rem;
+}
+}
+
+
+}

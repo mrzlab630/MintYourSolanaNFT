@@ -1,0 +1,14 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.PageWrap{
+  @include block;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  margin-bottom: 5rem;
+  padding:2.3rem 2.8rem;
+  background-color: $cr-dark-blue;
+  //word-wrap: break-word;
+}

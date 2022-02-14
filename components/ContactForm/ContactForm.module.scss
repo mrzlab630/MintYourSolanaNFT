@@ -1,0 +1,73 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+
+
+.ContactForm{
+  @include container;
+  width: 100%;
+
+
+  & .row{
+    @include block;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    padding: .3rem 0;
+
+    @media (min-width: $page-width-tab) {
+      width: 80%;
+    }
+  }
+
+  & .sendBtn{
+    @include block;
+    width: 100%;
+
+
+    & button{
+      @include block;
+      align-items: center;
+      margin: auto;
+      width: 5.5rem;
+
+      & span{
+        padding-left: .3rem;
+      }
+    }
+
+    & svg{
+      width: 1.2rem;
+      height: auto;
+      fill:$cr-white;
+    }
+  }
+
+  & .inputWrap{
+    padding: .5rem;
+    margin: auto;
+  }
+
+  & .input{
+    padding: .6rem;
+    margin: auto;
+  }
+
+  & .textareaWrap{
+    height: 10rem;
+    width: 100%;
+    padding: .6rem;
+
+    @media (min-width: $page-width-tab) {
+      height: 20rem;
+    }
+  }
+  & .textarea{
+    resize: none;
+  }
+
+
+}

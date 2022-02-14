@@ -1,0 +1,44 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+@mixin block{
+  padding: .3rem;
+  text-transform: capitalize;
+
+  @media (min-width: $page-width-tab) {
+    padding: .3rem .6rem;
+  }
+}
+
+.Switch {
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+
+  & .on{
+    background-color: $cr-azure;
+  }
+
+  & .off{
+    background-color: $cr-dark-azure;
+  }
+
+  & .one{
+    @include block;
+    border-radius: 0.25em 0 0 0.25em;
+  }
+
+  & .two{
+    @include block;
+    border-radius: 0 0.25em 0.25em 0;
+
+  }
+}

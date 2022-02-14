@@ -1,0 +1,98 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+@mixin btn{
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: capitalize;
+  transition: all 0.3s linear;
+}
+
+@mixin size{
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+}
+
+
+.text{
+  @include button;
+  background-color: transparent;
+  color: $cr-white;
+
+  &:hover{
+    background-color: transparent;
+  }
+
+}
+.round{
+  @include btn;
+  background-color: transparent;
+  border-radius: 100px;
+  color: $cr-azure;
+  border: 1px solid transparent;
+  padding: 0.8rem 1.3em !important;
+
+  &:hover{
+    background-color: rgba(144, 202, 249, 0.08);
+    border: 1px solid $cr-azure;
+  }
+
+}
+.outlined{
+  @include btn;
+  background-color: transparent;
+  color: $cr-azure;
+  border: 1px solid $cr-azure;
+
+  &:hover{
+    background-color: rgba(144, 202, 249, 0.08);
+    border: 1px solid $cr-azure;
+  }
+  &:active{
+    background-color: $cr-azure;
+  }
+}
+
+.contained{
+  @include btn;
+  color: $cr-white;
+  background-color: $cr-azure;
+  border: 1px solid $cr-azure;
+
+  &:hover{
+    background-color: $cr-dark-azure;
+  }
+
+  &:active{
+    background-color: $cr-azure;
+  }
+
+}
+
+.small{
+  @include size;
+  padding: .3rem .5rem;
+  font-size: .6825rem;
+}
+
+.medium{
+  @include size;
+  padding: .3rem .8rem;
+  font-size: .8rem;
+}
+
+.large{
+  @include size;
+  padding: .3rem 1rem;
+  font-size: 1rem;
+}
+
+.disabled{
+  opacity: .6;
+}
+
+
+.button{
+  @include button;
+}

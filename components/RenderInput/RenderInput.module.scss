@@ -1,0 +1,11 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+ .input{
+  height: 2.1rem;
+  padding: 0 1rem;
+}
+
+ .column{
+  @include container;
+}

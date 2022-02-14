@@ -1,0 +1,48 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.MetaplexDataForm{
+  border-left: 1px solid $cr-black-light-two;
+  padding: 1rem;
+
+  .MetaplexDataFormWrap{
+    overflow: hidden;
+  }
+
+  & .row{
+  @include block;
+    padding: .3rem 0;
+  }
+
+  & .column{
+    @include container;
+    margin: auto;
+    flex-grow: 1;
+  }
+
+  & .rowColumn{
+    flex-direction: column;
+    padding-left: 1rem;
+  }
+
+  & .input{
+    height: 1.5rem;
+  }
+
+  & .hover{
+    width: 100%;
+    height: 1px;
+    background-color: $cr-gray;
+  }
+
+  & .buttonWrap{
+    @include block;
+    justify-content: center;
+
+    & button{
+      width: 30%;
+    }
+  }
+
+}

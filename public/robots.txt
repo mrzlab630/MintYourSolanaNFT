@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /private/
+Disallow: /dashboard/
+Sitemap: https://MintYourSolanaNFT.com/sitemap.xml

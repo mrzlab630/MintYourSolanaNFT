@@ -1,0 +1,31 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.borderLight{
+  border: 1px solid $cr-azure;
+}
+.border{
+  border: 1px solid $cr-black-light-two;
+}
+
+.Textarea{
+
+  & textarea{
+    box-sizing: border-box;
+    background-color: transparent;
+    border-radius: 0.25em;
+    color: $cr-white;
+    width: 100%;
+    height: 100%;
+    padding: 0.6rem;
+    resize: none;
+
+    &:focus,
+    &:hover{
+      outline: none;
+      border-color: $cr-azure;
+    }
+  }
+
+}

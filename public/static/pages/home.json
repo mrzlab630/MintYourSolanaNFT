@@ -1,0 +1,4 @@
+{
+  "title": "Mint your Solana NFT",
+  "info": "<div class='subText'>to start minting you need:<div  class='text'>⛏️ <a target=\"_blank\" href=\"https://docs.arweave.org/info/wallets/arweave-web-extension-wallet\">Arweave address</a> and min {%%transactionPriceArweave%%}AR</div><div  class='text'>⛏️ min {%%transactionPriceSolana%%}Sol and <a target=\"_blank\" href=\"https://phantom.app/download\">Phantom Wallet</a></div></div>"
+}

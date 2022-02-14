@@ -1,0 +1,46 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+
+
+.Dialog{
+  @include block;
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: $cr-black-light;
+
+
+  & .wrap{
+    @include block;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    margin: auto;
+    padding:.8rem;
+    background-color: $cr-dark-blue;
+    max-width: $page-width-tab;
+    width: 80%;
+    overflow: hidden;
+    max-height: 30rem;
+
+    @media (min-width: $page-width-tab) {
+      height: 30rem;
+    }
+
+    & .content{
+      width: 95%;
+      height: 93%;
+      overflow: auto;
+      padding: .8rem;
+      @media (min-width: $page-width-tab) {
+        padding: 1rem .8rem;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,43 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.fullscreen{
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.15);
+  z-index: 99999999;
+  backdrop-filter: blur(5px);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.ProgressBar{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;//rgba(255, 255, 255, 0.15);
+  cursor: default;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;
+
+
+  & .icon{
+
+    width: 3rem;
+    height: auto;
+
+    & path, rect{
+      fill: $cr-azure;
+    }
+  }
+
+}

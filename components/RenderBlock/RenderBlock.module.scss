@@ -1,0 +1,12 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.RenderBlock{
+
+  & .column{
+    @include container;
+    margin: 0 0.3rem;
+  }
+
+
+}

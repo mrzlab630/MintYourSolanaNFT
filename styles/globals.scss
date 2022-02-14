@@ -1,0 +1,205 @@
+@import "./fonts.scss";
+@import "./variables.scss";
+@import "./mixins.scss";
+
+/** background-color **/
+.bg-white {
+  background-color: $cr-white;
+}
+.bg-dark-blue{
+  background-color: $cr-dark-blue;
+}
+.bg-blue{
+  background-color: $cr-blue;
+}
+.bg-azure{
+  background-color: $cr-azure;
+}
+
+
+/** color **/
+
+.cr-white {
+  color: $cr-white;
+}
+.cr-gray{
+  color: $cr-gray;
+}
+.cr-black{
+  color: $cr-black;
+}
+.cr-azure{
+  color: $cr-azure;
+}
+
+
+
+/** **/
+
+.mobileHidden{
+  display: none;
+
+  @media (min-width: $page-width-mobile-xl) {
+    display: unset;
+  }
+}
+
+.visible{
+  visibility:visible;
+  opacity: 1;
+}
+.invisible{
+  visibility: hidden;
+  opacity: 0;
+}
+.overflow-auto{
+  overflow: auto;
+}
+.overflow-hidden{
+  overflow: hidden;
+}
+.no-scrollbar{
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.disabled{
+  pointer-events: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;
+  cursor: default;
+  opacity: .6;
+}
+
+
+/** scrollbar **/
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $cr-gray $cr-azure;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: $cr-azure;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $cr-gray;
+  border: 1px solid $cr-azure;
+}
+
+
+/** **/
+
+label{
+  text-transform: capitalize;
+}
+
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+a{
+  color: $cr-gray-light-two;
+  font-weight: 700;
+}
+
+.title{
+  @include title;
+}
+
+.link{
+  text-decoration: none;
+  color: $cr-white;
+  font-weight: 300;
+  cursor: pointer;
+}
+.success{
+  color: $cr-gray-light-two;
+  font-weight: 700;
+}
+.subText{
+  @include subText;
+}
+.text{
+  @include text;
+}
+
+.body{
+  @include body;
+}
+.content{
+  width: 100%;
+  word-wrap: break-word;
+}
+.button{
+  @include button;
+}
+
+.logo{
+  vertical-align: sub;
+
+  & g{
+    fill:$cr-gray-light;
+
+    &:hover{
+      & path:first-child{
+        fill:$cr-dark-azure;
+      }
+    }
+
+  }
+
+}
+
+.facebookPixelImg{
+  display:none;
+  width:1px;
+  height:1px;
+}
+
+.ul{
+  margin: 0;
+  padding: 0 1rem 0 .3rem;
+
+  & li{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    padding: .4rem 0;
+
+    & span{
+      padding:0 .6rem;
+    }
+  }
+}
+
+.icon-home-info{
+  width: 1.5rem;
+  height: auto;
+  fill: $cr-gray-light;
+  filter: invert(1);
+}
+
+.textArea{
+  @include textArea;
+}

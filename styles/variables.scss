@@ -1,0 +1,30 @@
+
+/** color **/
+$cr-white: rgba(255, 255, 255, 1);
+$cr-gray:rgba(114, 127, 136, 1);
+$cr-gray-light: rgba(241, 241, 241, 0.73);
+$cr-gray-light-two: rgb(224, 224, 224);
+$cr-black:rgba(0,0,0,1);
+$cr-black-light:rgba(0,0,0,.6);
+$cr-black-light-two:rgb(71,82,93, .8);
+$cr-dark-blue:rgba(17, 25, 38, 1);
+$cr-blue:rgba(23, 34, 51, 1);
+$cr-azure: rgba(81, 183, 255, 1);
+$cr-dark-azure: rgb(5, 81, 133);
+
+$cr-error:rgb(211, 47, 47);
+$cr-warning:rgb(245, 124, 0);
+$cr-success:rgb(56, 142, 60);
+$cr-info:rgba(8, 148, 248, 1);
+
+
+
+/** width **/
+$page-width:1200px;
+$page-width-tab: 968px;
+$page-width-mobile-nano: 280px;
+$page-width-mobile: 320px;
+$page-width-mobile-m: 375px;
+$page-width-mobile-xl: 540px;
+
+$page-width-footer-header:$page-width + 150px;

@@ -1,0 +1,143 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.Container{
+  width: 100%;
+  min-height: 100vh;
+  @include container;
+
+
+  & .block{
+    width: 90%;
+    height: 4.5rem;
+    //overflow: hidden;
+    margin: auto;
+    @include block;
+    align-items: center;
+    color: $cr-gray;
+
+    @media (min-width: $page-width) {
+     max-width: $page-width-footer-header;
+    }
+
+    & .blockWrap{
+      @include block;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+  & .btnNewNoteTxt{
+    padding-left: .5rem;
+    color: $cr-gray-light-two;
+  }
+  & .logo{
+    width: 1.3rem;
+    height: auto;
+    vertical-align: sub;
+    & g{
+
+      & path:first-child{
+        fill:$cr-azure;
+      }
+      & path{
+        fill:$cr-gray-light;
+      }
+      &:hover{
+        & path:first-child{
+          fill:$cr-gray-light;
+        }
+      }
+
+    }
+
+  }
+
+  & .header{
+    @include containerCompHF;
+
+
+
+    @media (min-width: $page-width) {
+      padding-top: 1.5rem;
+    }
+
+    & .headerWrap{
+
+    }
+  }
+
+  & .main{
+    width: 90%;
+    margin: auto;
+    //margin-bottom: 5rem;
+
+    @media (min-width: $page-width-mobile-xl) {
+     // margin: auto;
+    }
+
+    @media (min-width: $page-width-tab) {
+      width: $page-width-tab;
+
+    }
+    @media (min-width: $page-width) {
+      width: $page-width;
+    }
+  }
+
+  & .menuBottom{
+    margin: 0;
+    padding: 0;
+
+    & li{
+      display: inline;
+      list-style-type: none;
+      padding-left: .1rem;
+
+      @media (min-width: $page-width-mobile-xl){
+        padding-left: 1rem;
+      }
+
+      & a{
+        text-transform: capitalize;
+        font-size: .8rem;
+      }
+    }
+  }
+
+  & .footer{
+    @include containerCompHF;
+    padding-bottom: 3.5rem;
+    margin-top: 3rem;
+
+    & .footerContent{
+     // flex-grow: 1;
+    }
+
+    & .footerAuth{
+      font-size: .7rem;
+      cursor: default;
+      text-align: right;
+
+      position: absolute;
+      right: 1rem;
+      margin-top: 3rem;
+
+      @media (min-width:$page-width-tab) {
+        position: relative;
+        margin-top:0;
+        right:0;
+      }
+
+    }
+
+    & .footerWrap{
+      background-color: $cr-dark-blue;
+    }
+
+  }
+
+
+}

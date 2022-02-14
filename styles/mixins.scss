@@ -1,0 +1,150 @@
+@import "./variables.scss";
+@import "./fonts.scss";
+
+
+@mixin container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+}
+@mixin block{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@mixin containerCompHF{
+  width: 100%;
+}
+
+@mixin title{
+  font-size: 1.6rem;
+  margin-top: .8rem;
+  margin-bottom: 1.3rem;
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.235;
+  text-transform: capitalize;
+
+  @media (min-width: $page-width-mobile-xl) {
+    font-size:  2.125rem;
+  }
+
+  @media (min-width: $page-width-tab) {
+    font-size: 2.3rem;
+  }
+
+
+}
+
+
+@mixin subText{
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: .8rem;
+  line-height: 1.6;
+  color: $cr-gray;
+  font-weight: 300;
+  text-transform: capitalize;
+
+
+  @media (min-width: $page-width-tab) {
+    font-size: 1.3rem;
+  }
+}
+
+@mixin text{
+  font-size: .8rem;
+  margin-top: .8rem;
+  margin-bottom: .8rem;
+  line-height: 1.6;
+  color: $cr-gray-light;
+  font-weight: 300;
+  text-transform: none;
+
+  &:first-letter{
+    text-transform: uppercase;
+  }
+
+
+  @media (min-width: $page-width-tab) {
+    font-size: 1rem;
+  }
+}
+
+@mixin body{
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@mixin paper{
+  border-radius: 4px;
+  box-shadow:2.9px 5.8px 5.8px $cr-black;
+}
+
+@mixin button{
+  border: 0 none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: .5rem;
+
+  &:hover{
+    background-color: $cr-gray-light;
+  }
+
+  &:active{
+    opacity: .8;
+    background-color: $cr-gray-light-two;
+  }
+}
+
+@mixin pre{
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: $cr-blue;
+  background-color: $cr-gray-light;
+  padding: 1rem 1.3rem;
+  margin: 0;
+  border-radius: 3px;
+  width: 12rem;
+
+  @media (min-width: $page-width-mobile) {
+    width: 13rem;
+  }
+  @media (min-width: $page-width-mobile-m) {
+    width: 85%;
+  }
+
+  @media (min-width: $page-width-tab) {
+    margin-left: 1.3rem;
+  }
+
+}
+
+
+@mixin textArea{
+  box-sizing: border-box;
+  background-color: transparent;
+  border-radius: 0.25em;
+  border: 1px solid $cr-black-light-two;
+  color: $cr-white;
+  width: 100%;
+  height: 100%;
+  padding: 0.6rem;
+  word-wrap: break-word;
+
+
+  &:focus,
+  &:hover{
+    outline: none;
+    border-color: $cr-azure;
+  }
+}

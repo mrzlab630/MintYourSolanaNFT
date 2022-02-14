@@ -1,0 +1,134 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+
+.progressStatus{
+  width: 100%;
+  @include block;
+  justify-content: flex-end;
+}
+
+.HomePage{
+  @include container;
+  width: 90%;
+  margin: auto;
+  align-items: center;
+  padding-bottom: 3rem;
+
+  @media (min-width: $page-width-tab) {
+    padding-bottom: 0;
+  }
+
+
+  @media (min-width: $page-width-tab) {
+    @include block;
+    align-items: center;
+    width: 100%;
+  }
+
+  & .browExtList{
+    margin: 0;
+    padding: 1em 0;
+
+    & li{
+      list-style: none;
+      display: inline-block;
+      padding: .3em .6em;
+    }
+
+  }
+
+
+  & .BrowExtIcon{
+    width: 3em;
+    height: auto;
+  }
+
+  & .info{
+    width: 100%;
+
+    @media (min-width: $page-width-tab) {
+      width: 40%;
+    }
+
+    & .infoWrap{
+      padding: 0;
+
+      @media (min-width: $page-width-tab) {
+        padding: 0 1.8rem;
+      }
+    }
+
+  }
+
+  & .content{
+    width: 100%;
+    position: relative;
+
+
+    @media (min-width: $page-width-tab) {
+      width: 60%;
+
+    }
+
+
+    & .contentWrap{
+      position: relative;
+      width: 100%;
+      padding: 0;
+
+    }
+
+
+  }
+
+  & .progress{
+
+  }
+
+  & .menu{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    padding-left:0;
+
+    & .menuCenter{
+      text-align: center;
+      @media (min-width: $page-width-tab) {
+      flex-grow: 1;
+      }
+    }
+
+  }
+
+
+  & .progressInfo{
+    color: $cr-azure;
+    height: 200px;
+    width: 100%;
+    letter-spacing: 1.2px;
+    line-height: 1.7;
+    border-left: 1px solid;
+    padding: 1rem;
+    overflow-y: auto;
+
+    & .progressInfoMessage{
+
+    }
+
+    & span::first-letter{
+      text-transform: uppercase;
+    }
+    & span{
+      display: block;
+    }
+
+
+  }
+
+}

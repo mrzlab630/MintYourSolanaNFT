@@ -1,0 +1,26 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.AddMore{
+
+    @include container;
+    width: 100%;
+    padding: .3rem 0;
+
+    & .renderBlock{
+        @include block;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+
+    }
+    & .renderBlockFull{
+        @include container;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    & .renderButton{
+        padding: 1.5rem 0;
+
+    }
+}

@@ -1,0 +1,138 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+$height:32px;
+$width:100%;
+$widthWrap:98%;
+
+@mixin border{
+  border: 1px solid $cr-gray;
+  border-radius: 0.25em;
+}
+
+
+
+.Select{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-content: flex-start;
+  flex-direction: column;
+  width: $width;
+  flex-wrap: nowrap;
+  position: relative;
+
+  & .selectColor{
+    width: $width;
+  }
+  & .notSelectColor{
+    color: $cr-gray;
+  }
+
+  & .wrap{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: $widthWrap;
+    min-height: $height;
+    position: relative;
+    cursor: default;
+    background-color: transparent;
+
+    outline: 0px !important;
+    overflow: hidden;
+    @include border;
+
+
+    &:hover{
+      border: 1px solid $cr-azure;
+    }
+  }
+
+  & .separatorVer{
+    background-color: $cr-gray;
+    width: 1px;
+    min-height: $height/1.8;
+  }
+
+  & .lable{
+    @include container;
+    overflow: hidden;
+    flex-grow: 1;
+    padding: 0 1rem;
+
+    & span::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  & .sortIndicator{
+    @include container;
+    padding: 8px;
+    transition: all 200ms linear;
+  }
+
+  .tglIcon{
+    transform: rotate(180deg);
+  }
+
+  & .sortIcon{
+    width: 20px;
+    height: 20px;
+    fill:$cr-gray-light;
+
+    &:hover{
+      fill: $cr-azure;
+    }
+  }
+
+  & .menu{
+    top: 100%;
+    margin: 0.3rem 0;
+    padding: 0.3rem 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    @include border;
+    max-height: 160px;
+    min-width: $widthWrap;
+    overflow: auto;
+    position: absolute;
+    z-index: 2;
+    background-color: $cr-dark-blue;
+    outline: 0px !important;
+  }
+
+  & .selectedItm{
+    background-color: $cr-dark-azure;
+  }
+  & .notSelectedItm{
+    background-color: transparent;
+  }
+  & .itm{
+    width: 100%;
+    cursor: default;
+    padding: 0.2rem 0;
+    margin: auto;
+
+    &:hover{
+      background-color: $cr-gray;
+    }
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+
+    & span{
+      padding-left: .6rem;
+    }
+  }
+
+
+}
