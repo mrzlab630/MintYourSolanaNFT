@@ -9,10 +9,9 @@
  */
 
 import {IuploadFileToArweave} from "./types/IuploadFileToArweave"
-import * as wallet from '../../../arweave-keyfile-PQ_yu8LyXmTmi4139b_VJzi9dmkrOCnwSCTLhfEwAPk.json'
 import awaitTransactionConfirmation from "./awaitTransactionConfirmation"
 import startAgentArweave from "./startAgentArweave"
-import loggingInfo from "../../utils/loggingInfo";
+import loggingInfo from "../../utils/loggingInfo"
 
 
 const readFile = (file:File):Promise<string | ArrayBuffer | null> => new Promise((resolve, reject) => {
