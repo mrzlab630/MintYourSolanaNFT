@@ -55,7 +55,7 @@ $widthWrap:98%;
   & .separatorVer{
     background-color: $cr-gray;
     width: 1px;
-    min-height: $height/1.8;
+    min-height: calc($height / 1.8);
   }
 
   & .lable{

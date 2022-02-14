@@ -27,7 +27,6 @@ import {
     findProgramAddress,
     getEdition,
     mintNFT,
-    burnNFT,
     sendSignedTransaction,
     sendTransactionWithRetry,
     updateMetadata
@@ -73,7 +72,6 @@ export {
     findProgramAddress,
     getEdition,
     mintNFT,
-    burnNFT,
     sendSignedTransaction,
     sendTransactionWithRetry,
     updateMetadata
