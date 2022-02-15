@@ -24,7 +24,7 @@ const awaitTransactionConfirmation:IawaitTransactionConfirmation = async functio
                                                                                        logging
 }){
 
-     timeout = timeout || 99900000
+     timeout = timeout || 99999999
 
     loggingInfo({
         str:`Transaction verification. Please wait`,
@@ -53,7 +53,7 @@ const awaitTransactionConfirmation:IawaitTransactionConfirmation = async functio
 
     try{
 
-        await sleepUtil(150000)
+        await sleepUtil(180000)
 
         while (!transactionStatus?.done ) {
 
@@ -89,7 +89,7 @@ const awaitTransactionConfirmation:IawaitTransactionConfirmation = async functio
                     }else{
                         transactionStatus.logging =`Pending..`
                         transactionStatus.done = false
-                        await sleepUtil(150000)
+                        await sleepUtil(180000)
                     }
                     break
 
@@ -109,7 +109,7 @@ const awaitTransactionConfirmation:IawaitTransactionConfirmation = async functio
 
 
             if(transactionStatus.code !== 200){
-                await sleepUtil(25000)
+                await sleepUtil(28000)
             }
         }
 
