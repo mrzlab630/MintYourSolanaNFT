@@ -8,7 +8,7 @@
     "start": "next start -p 4008",
     "lint": "next lint",
     "prod:pm2start": "pm2 start ./pm2.config.js --env production",
-    "prod:update": "git pull gh production && yarn install && yarn build && pm2 restart mintYourSolanaNFT"
+    "prod:update": "git pull gh main && yarn install && yarn build && pm2 restart mintYourSolanaNFT"
   },
   "dependencies": {
     "@apollo/client": "^3.4.17",
