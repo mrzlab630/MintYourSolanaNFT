@@ -234,6 +234,7 @@ const HomePage: NextPage<IHomePage> = ({
 
     const handleGetMetaplexData = async (v?:IMetaplexDataFormCallbackParams) => {
 
+
         showAlertInfo({
             str:undefined,
             type:'success'

@@ -8,7 +8,12 @@
  *
  */
 import React, {FC, useState,useEffect} from "react"
-import {IMetaplexDataAcceptTypes, IMetaplexDataForm, IMetaplexDataList} from './interface'
+import {
+    IMetaplexDataAcceptTypes,
+    IMetaplexDataForm,
+    IMetaplexDataFormCallbackParams,
+    IMetaplexDataList
+} from './interface'
 import classes from './MetaplexDataForm.module.scss'
 
 import Select from "../Select"
@@ -158,48 +163,41 @@ const MetaplexDataForm: FC<IMetaplexDataForm> = ({
 
     const handleGetDataObjMore = (id:string) => (value:any) => {
 
-
         const addData = (trgObjArr:any) =>{
 
             const val = value.value.value
             const keyId = value.value.id
 
+            const newData = !Array.isArray(trgObjArr) ? [] : trgObjArr
+
+            let finData
+
+
             const newValTrgObj = {[keyId]: val}
 
-            if(!Array.isArray(trgObjArr)){
-                trgObjArr = []
-            }
+            if(newData[Number(value.id)]){
 
-            if(trgObjArr[Number(value.id)]){
-
-                if(typeof val === "string" && val?.length === 0){
-                    delete trgObjArr[Number(value.id)][keyId]
-                }else{
-                    trgObjArr[Number(value.id)] = {
-                        ...trgObjArr[Number(value.id)],
+                    const newObj = {
+                        ...newData[Number(value.id)],
                         ...newValTrgObj
                     }
-                }
 
-                //if(Object.keys(trgObjArr[Number(value.id)]).length === 0){
-                  //  trgObjArr.splice(Number(value.id), 1)
-                  //  delete trgObjArr[Number(value.id)]
-                //}
+                    finData = newData.map((itm,idx) => idx === Number(value.id) ? newObj : itm)
 
             }else{
-                trgObjArr.push(newValTrgObj)
+                finData = [...newData,newValTrgObj]
             }
-            return trgObjArr
+            return finData
 
         }
-
 
 
 
         switch (id) {
 
             case "attributes":
-                setMetaData(prev =>  ({ ...prev,[id]:addData(prev?.[id])}))
+
+              setMetaData(prev =>  ({ ...prev,[id]:addData(prev?.[id])}))
 
                 return
 
@@ -224,8 +222,11 @@ const MetaplexDataForm: FC<IMetaplexDataForm> = ({
 
     }
 
-    //@ts-ignore
-    const handleClick = () => typeof callback === "function" ? callback(metaData) : null
+
+    const handleClick = () => typeof callback === "function" ? callback(metaData as IMetaplexDataFormCallbackParams) : null
+
+
+
 
 
     const detectDefault = (id:string) =>{
