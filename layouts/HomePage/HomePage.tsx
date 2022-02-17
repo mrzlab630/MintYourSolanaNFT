@@ -49,6 +49,7 @@ import AlertSvg from '../../assets/svg/alert.svg'
 import useIsMobile from "../../hooks/useIsMobile"
 import RenderBlock from "../../components/RenderBlock";
 import {IRenderBlockOnChangeParams} from "../../components/RenderBlock/interface";
+import {ISelectCallbackParam} from "../../components/Select/interface";
 
 
 
@@ -75,6 +76,8 @@ const HomePage: NextPage<IHomePage> = ({
         browserExtensions,
         solanaNet,
     } = useAppSelector((state:RootState) => state.settings)
+
+
 
     const {defaultNFTMetadata} = useAppSelector((state:RootState) => state)
 
@@ -117,6 +120,8 @@ const HomePage: NextPage<IHomePage> = ({
 
 
     useEffect(() => setDefaultMetaplexMetadata(defaultNFTMetadata),[defaultNFTMetadata])
+
+
 
     useEffect(() => setSolanaCluster(solanaNet),[solanaNet])
 
@@ -574,13 +579,20 @@ const HomePage: NextPage<IHomePage> = ({
 
     }
 
+    const handleGetSolanaNet = (v:ISelectCallbackParam) => {
+
+        setSolanaCluster(v as TsolanaCluster)
+        addSolanaNet(v as TsolanaCluster)
+    }
+
+
     const header = <div className={classes.progressStatus}>
         {
             isLoading ?  <ProgressBar/> : solanaWallet && <Select
                 list={['devnet','testnet','mainnet-beta']}
                 width={'18%'}
                 defaultValue={solanaCluster}
-                callback={v => addSolanaNet(v as TsolanaCluster)}
+                callback={handleGetSolanaNet}
             />
         }
     </div>

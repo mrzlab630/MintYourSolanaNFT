@@ -22,10 +22,18 @@ export const settingsSlice = createSlice({
         {
             state.transactionPrice
         },
-        addSolanaNet:(state:IinitialStateSettings,action: PayloadAction<TsolanaNet>) =>
-        {
+        addSolanaNet(state:IinitialStateSettings,action: PayloadAction<TsolanaNet>) {
             state.solanaNet = action.payload
-        }
+        },
+        // addSolanaNet:(state:IinitialStateSettings,action: PayloadAction<TsolanaNet>) =>
+        // {
+        //     const {payload} = action
+        //
+        //   return {
+        //         ...state,
+        //       solanaNet:payload
+        //   }
+        // }
     }
 })
 
