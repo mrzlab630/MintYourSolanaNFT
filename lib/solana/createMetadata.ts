@@ -57,9 +57,6 @@ const createMetadata:IcreateMetadata = async function({
 
        let txnData = getTxnData(value)
 
-       console.log({txnData})
-
-
        const keys = [
            {
                pubkey: new PublicKey(metadataAccount),

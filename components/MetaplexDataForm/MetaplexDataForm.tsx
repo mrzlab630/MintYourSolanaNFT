@@ -100,7 +100,7 @@ const MetaplexDataForm: FC<IMetaplexDataForm> = ({
 
                      if(typeof value === "string" && value?.length === 0){
 
-                         if(prev){
+                         if(prev && prev[id]){
                              delete prev[id]
                          }
 

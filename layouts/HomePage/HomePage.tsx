@@ -9,7 +9,7 @@
  */
 
 import {useEffect, useState, useRef} from "react"
-import {IHomePage} from './interface'
+import {IHomePage, ImintNFTtoSolana, IprintResult, IuploadAndMint, IuploadToArweave} from './interface'
 import Container from "../../components/Container"
 import classes from './HomePage.module.scss'
 import PageMotionWrap from "../../components/PageMotionWrap"
@@ -43,6 +43,17 @@ import {addCreatorNFTMetadata, addToDefaultNFTMetadata} from "../../redux/slices
 import {addSolanaNet} from "../../redux/slices/settings"
 import {IinitialStateDefaultNFTMetadata} from "../../redux/initialState/defaultNFTMetadata"
 import {IBrowserExtensionsExtension} from "../../redux/initialState/settings"
+import useWindowSize from "../../hooks/useWindowSize"
+
+import AlertSvg from '../../assets/svg/alert.svg'
+import useIsMobile from "../../hooks/useIsMobile"
+import RenderBlock from "../../components/RenderBlock";
+import {IRenderBlockOnChangeParams} from "../../components/RenderBlock/interface";
+
+
+
+
+
 
 
 
@@ -53,6 +64,9 @@ const HomePage: NextPage<IHomePage> = ({
 }) => {
 
     const messagesEndRef = useRef<HTMLDivElement>(null)
+
+    const isMobile = useIsMobile()
+    const {width:winWidth} = useWindowSize()
 
     const dispatch = useAppDispatch()
 
@@ -88,12 +102,13 @@ const HomePage: NextPage<IHomePage> = ({
 
     const [solanaWallet, setSolanaWallet] = useState<any>(undefined)
 
-
-    const [arweaveImgUri, setArweaveImgUri] = useState<string|undefined>(undefined)
     const [solanaMintKey, setSolanaMintKey] = useState<string|undefined>(undefined)
 
 
     const [phantomWalletPresent, setPhantomWalletPresent] = useState<boolean>(false)
+
+    const [isSubtleCrypto, setIsSubtleCrypto] = useState<boolean>(false)
+
 
 
     const [phantomBrowExt, setPhantomBrowExt] = useState<IBrowserExtensionsExtension[]|undefined>(undefined)
@@ -117,6 +132,8 @@ const HomePage: NextPage<IHomePage> = ({
     useEffect(() => {
         (async () => {
             await delay(380)
+
+            setIsSubtleCrypto("crypto" in window)
 
             setPhantomWalletPresent("solana" in window)
 
@@ -194,7 +211,8 @@ const HomePage: NextPage<IHomePage> = ({
                 address:'3kRLWEKNZsGsZnUkzLiWvhM7Bymd9LkxPW5MjGKNrnHm',
                 share:2,
                 verified:true
-            }]
+            }
+        ]
 
         dispatch(addCreatorNFTMetadata(selfCreator))
 
@@ -232,114 +250,222 @@ const HomePage: NextPage<IHomePage> = ({
         return {error,metadata}
     }
 
-    const handleGetMetaplexData = async (v?:IMetaplexDataFormCallbackParams) => {
 
 
-        showAlertInfo({
-            str:undefined,
-            type:'success'
-        })
-
-
-         const {error:errInfo,metadata} = dataSerialization(v)
-
-
-        if(errInfo || !metadata){
-            showAlertInfo({
-                str:errInfo,
-                type:'error'
-            })
-            return
-        }
-
-        // @ts-ignore
-        const {upload_file} = v || undefined
-
-        delete v?.upload_file
-
-            addToDefaultNFTMetadata(v as IinitialStateDefaultNFTMetadata)
-
-
-        setIsLoading(true)
-        setStepperPosition(3)
-
-            //1. upload to arweave
-
-        if(!arweaveWalletKey){
-            showAlertInfo({
-                str:`arweave key file is undefined`,
-                type:'error'
-            })
-            return
-        }
-
-            const {
-                error:errUploadInArweave,
-                image:imageFromArweave,
-                json:jsonFromArweave,
-            } = await metaplexAddData({
-                walletKey:arweaveWalletKey,
-                file:upload_file[0],
-                metadata,
-                logging:v => addLoggingProgress(v)
-            })
-
-            if(errUploadInArweave || !jsonFromArweave?.links ||  !imageFromArweave?.links){
-                showAlertInfo({
-                    str:errUploadInArweave ?? `can't upload file to Arweave`,
-                    type:'error'
-                })
-                setIsLoading(false)
-                return
-            }
-
-        const {uri:imageMetadataUri} = jsonFromArweave?.links
-        const {uri:imageFileUri} = imageFromArweave?.links
-
-        setArweaveImgUri(imageFileUri)
-
-        //2. mint NFT to solana
-        addLoggingProgress(`Starting Solana NFT Token minting`)
-
-        await delay(200)
-
-        addLoggingProgress(`Pending...`)
-
-
-        const mintSolNFT = await mintNFT({
-            cluster:solanaCluster,
-            wallet:solanaWallet,
-            metadata:{
-                name:metadata.name,
-                symbol:metadata.symbol,
-                uri:imageMetadataUri,
-                sellerFeeBasisPoints:metadata.seller_fee_basis_points,
-                //@ts-ignore
-                creators:metadata.properties.creators
-
-            }
-        })
-
-        const {error:mintSolNFTErr,result:mintSolNFTRes} = mintSolNFT
-
-        if(mintSolNFTErr){
-            showAlertInfo({
-                str:mintSolNFTErr,
-                type:'error'
-            })
-            return
-        }
-
-        const {mintKey} = mintSolNFTRes
-
-        setSolanaMintKey(mintKey)
-
+    //0. print result
+    const printResult:IprintResult = async ({mintKey,solanaCluster}) =>{
 
         addLoggingProgress(`<span class="success">Successfully. Solana NFT Token created.</span>`)
         await delay(200)
         addLoggingProgress(`Mint Key: <a target="_blank" href="https://explorer.solana.com/address/${mintKey}/metadata?cluster=${solanaCluster}">${mintKey}</a>`)
 
-        setIsLoading(false)
+    }
+
+    //1. upload to arweave
+    const uploadToArweave: IuploadToArweave = async ({walletKey,file,metadata}) => {
+        try {
+
+            const {
+                error: errUploadInArweave,
+                image: imageFromArweave,
+                json: jsonFromArweave,
+            } = await metaplexAddData({
+                walletKey,
+                file,
+                metadata,
+                logging: v => addLoggingProgress(v)
+            })
+
+            if (errUploadInArweave || !jsonFromArweave?.links || !imageFromArweave?.links) {
+                throw new Error(errUploadInArweave)
+            }
+
+            const {uri: imageMetadataUri} = jsonFromArweave?.links
+            const {uri: imageFileUri} = imageFromArweave?.links
+
+            if (!imageFileUri || !imageMetadataUri) {
+                throw new Error('fatal error')
+            }
+
+            return {
+                imageFileUri,
+                imageMetadataUri
+            }
+
+
+        } catch (e) {
+            const err = e as Error
+            return {error: err.message || 'fatal error'}
+        }
+
+    }
+
+    //2. mint NFT to solana
+    const mintNFTtoSolana: ImintNFTtoSolana = async ({cluster,wallet,metadata}) => {
+        try {
+            addLoggingProgress(`Starting Solana NFT Token minting`)
+
+            await delay(200)
+
+            addLoggingProgress(`Pending...`)
+
+            const mintSolNFT = await mintNFT({
+                cluster,
+                wallet,
+                metadata
+            })
+
+            const {error: mintSolNFTErr, result: mintSolNFTRes} = mintSolNFT
+
+            if (mintSolNFTErr || !mintSolNFTRes) {
+                throw new Error(mintSolNFTErr || 'fatal error')
+            }
+
+            const {mintKey} = mintSolNFTRes
+
+            return {mintKey}
+
+        } catch (e) {
+            const err = e as Error
+            return {error: err.message || 'fatal error'}
+        }
+
+    }
+
+    //3. upload to arweave and mint NFT to solana
+    const uploadAndMint:IuploadAndMint = async ({
+                                                    metadata,
+                                                    arweaveWalletKey,
+                                                    file,
+                                                    arweaveUri
+    }) =>{
+        try {
+
+            let imageMetadataUri
+
+            if (file && arweaveWalletKey) {
+
+                if (!arweaveWalletKey) {
+                    throw new Error(`arweave key file is undefined`)
+
+                }
+
+                const {
+                    error: errUploadToArweave,
+                    imageMetadataUri: UploadToArweave
+                } = await uploadToArweave({metadata,walletKey:arweaveWalletKey,file})
+
+
+                if (errUploadToArweave || !UploadToArweave) {
+                    throw  new Error(errUploadToArweave || `can't upload to Arweave`)
+                }
+
+                imageMetadataUri = UploadToArweave
+
+            } else {
+                imageMetadataUri = arweaveUri
+            }
+
+            if (!imageMetadataUri) {
+                throw  new Error(`can't get the link to the asset on Arweave`)
+            }
+
+            const creatorsAll = metadata.properties.creators ?? []
+
+            const creators = creatorsAll.filter(itm => {
+                const {address:addressItm,share:shareItm} = itm
+
+                return addressItm && addressItm.length > 0 && shareItm
+            })
+
+
+            const metadataForSolana = {
+                cluster: solanaCluster,
+                wallet: solanaWallet,
+                metadata: {
+                    name: metadata.name,
+                    symbol: metadata.symbol,
+                    uri: imageMetadataUri,
+                    sellerFeeBasisPoints: metadata.seller_fee_basis_points,
+                    creators
+                }
+            }
+
+            //@ts-ignore
+            const {error: mintErr, mintKey} = await mintNFTtoSolana(metadataForSolana)
+
+            if (mintErr || !mintKey) {
+                throw  new Error(mintErr || `can't upload to Solana`)
+            }
+
+            printResult({solanaCluster,mintKey})
+
+            return {mintKey}
+
+
+        }catch (e) {
+            const err = e as Error
+            addLoggingProgress(`<span class="success">${err?.message || `fatal error`}</span>`)
+            return {error: err.message || 'fatal error'}
+        }
+    }
+
+
+
+    const handleGetMetaplexData = async (v?:IMetaplexDataFormCallbackParams) => {
+        try {
+
+
+            const {error: errInfo, metadata} = dataSerialization(v)
+
+
+            if (errInfo || !metadata) {
+                throw  new Error(errInfo)
+            }
+
+            // @ts-ignore
+            const {upload_file} = v || undefined
+
+            delete v?.upload_file
+
+            addToDefaultNFTMetadata(v as IinitialStateDefaultNFTMetadata)
+
+
+            setIsLoading(true)
+            setStepperPosition(3)
+
+            if (!arweaveWalletKey) {
+                throw new Error(`arweave key file is undefined`)
+            }
+
+            const {error,mintKey} = await uploadAndMint({
+                metadata,
+                arweaveWalletKey,
+                file:upload_file[0],
+            })
+
+            if (error) {
+                throw new Error(error)
+            }
+
+
+            setSolanaMintKey(mintKey)
+
+            setIsLoading(false)
+
+        }catch (e) {
+            const err = e as Error
+
+            showAlertInfo({
+                str: err?.message || `fatal error`,
+                type: 'error'
+            })
+
+
+            setIsLoading(false)
+        }
+
+
     }
 
     const handleChangeGetArweaveKey = (files:FileList) => {
@@ -377,9 +503,80 @@ const HomePage: NextPage<IHomePage> = ({
 
     }
 
+    const handleGetMetaplexFromArweave = async (v:IRenderBlockOnChangeParams) =>{
+        try {
+
+            const {value} = v
+
+
+            if(!value || typeof value !== "string"){
+                return
+            }
+
+            const regexObj = /https:\/\/(.*).arweave.net\/(.*)/ig
+
+            const testLink = regexObj.test(value)
+
+
+            if(!testLink){
+                throw new Error(`The link is't correct`)
+            }
+
+            setIsLoading(true)
+
+            setStepperPosition(3)
+            addLoggingProgress(`<span>downloading metadata from Arweave</span>`)
+
+
+            const getMetaData = await fetch(value,{
+                method:'GET',
+                mode: 'cors',
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+
+
+            const metadata = await getMetaData?.json()
+
+            if(!metadata){
+                throw new Error(`can't get data from metaDataJson`)
+            }
+
+            addLoggingProgress(`<span>metadata downloaded successfully</span>`)
+
+
+          const {error,mintKey} = await uploadAndMint({
+              metadata,
+              arweaveUri:value
+            })
+
+            if (error) {
+                throw new Error(error)
+            }
+
+
+            setSolanaMintKey(mintKey)
+            setIsLoading(false)
+
+        }catch (e) {
+            const err = e as Error
+
+            addLoggingProgress(`<span class="success">${err?.message || `fatal error`}</span>`)
+
+            showAlertInfo({
+                str: err?.message || `fatal error`,
+                type: 'error'
+            })
+
+            setIsLoading(false)
+        }
+
+    }
+
     const header = <div className={classes.progressStatus}>
         {
-            isLoading ?  <ProgressBar/> : arweaveWalletKey && <Select
+            isLoading ?  <ProgressBar/> : solanaWallet && <Select
                 list={['devnet','testnet','mainnet-beta']}
                 width={'18%'}
                 defaultValue={solanaCluster}
@@ -387,9 +584,6 @@ const HomePage: NextPage<IHomePage> = ({
             />
         }
     </div>
-
-
-
 
 
     const renderBrowExtPhantom = Array.isArray(phantomBrowExt) ? phantomBrowExt?.map((itm,idx) =>{
@@ -410,8 +604,6 @@ const HomePage: NextPage<IHomePage> = ({
                 </li>
     }) : undefined
 
-
-
     const renderPregressInfo =  <div  className={classes.progressInfo}>
         <div
             className={classes.progressInfoMessage}
@@ -419,7 +611,6 @@ const HomePage: NextPage<IHomePage> = ({
         />
         <div id={'messagesEndRef'} ref={messagesEndRef} />
     </div>
-
 
     const renderButtonConnectPhantom = <div className={classes.menu}>
         <div className={classes.menuCenter}>
@@ -442,12 +633,19 @@ const HomePage: NextPage<IHomePage> = ({
     </div>
 
     const renderArweaveConnect = <div className={classes.menuCenter}>
-
-
         <InputFile
             size={'large'}
             name={'select arweave key file'}
             onChange={handleChangeGetArweaveKey}
+        />
+
+        <div className={classes.separator}>or</div>
+
+        <RenderBlock
+            type={'text'}
+            tooltip={'link to Metaplex json data in arweave'}
+            lable={'I have already uploaded an asset on arweave'}
+            onChange={handleGetMetaplexFromArweave}
         />
 
     </div>
@@ -519,6 +717,11 @@ const HomePage: NextPage<IHomePage> = ({
     </div>
 
 
+    const usePc = <div className={classes.HomePage}>
+            <AlertSvg className={classes.iconErr} />
+            <span className={classes.alert}>please use a desktop PC </span>
+    </div>
+
 
 
     return <>
@@ -535,7 +738,9 @@ const HomePage: NextPage<IHomePage> = ({
                 {...{header}}
             >
                 {
-                    !initPage ? <ProgressBar/> : renderPage
+                    !initPage ? <ProgressBar/> :
+                                        !isSubtleCrypto || isMobile ? usePc
+                                                : renderPage
                 }
             </Container>
         </>

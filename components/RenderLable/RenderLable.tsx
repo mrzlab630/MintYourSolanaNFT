@@ -16,7 +16,7 @@ import classes from './RenderLable.module.scss'
 
 
 const RenderLable: FC<IRenderLable> = ({tooltip,lable}) => <label
-    className={classes.classes}
+    className={classes.RenderLable}
 >
     {
         tooltip ? <Tooltip position={'top'} title={tooltip}>{lable?.replace(/_/g,' ')}</Tooltip>

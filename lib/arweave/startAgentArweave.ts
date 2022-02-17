@@ -17,7 +17,6 @@ const startAgentArweave:IstartAgentArweave = function ({
                                         timeout
                                     }) {
     try {
-
         timeout = timeout || 20000
 
 

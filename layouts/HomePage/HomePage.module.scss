@@ -38,6 +38,25 @@
 
   }
 
+  & .separator{
+    padding-top: 1.6em;
+    padding-bottom: 1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+
+  & .alert{
+    font-size: 1.3em;
+    text-transform: capitalize;
+    padding: 1.3em;
+  }
+  & .iconErr{
+    width: 1.1em;
+    height: auto;
+    fill: $cr-error;
+  }
+
 
   & .BrowExtIcon{
     width: 3em;
