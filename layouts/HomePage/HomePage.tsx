@@ -513,12 +513,12 @@ const HomePage: NextPage<IHomePage> = ({
                 return
             }
 
-            const regexObj = /https:\/\/(.*).arweave.net\/(.*)/ig
+            // const regexObj = /https:\/\/(.*).arweave.net\/(.*)/ig
+            // const testLink = regexObj.test(value)
+            const regexObjA = /(.*)arweave.net\/(.*)/ig
+            const testLinkA = regexObjA.test(value)
 
-            const testLink = regexObj.test(value)
-
-
-            if(!testLink){
+            if(!testLinkA){
                 throw new Error(`The link is't correct`)
             }
 
