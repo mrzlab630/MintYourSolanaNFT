@@ -36,8 +36,8 @@ const mintNFT:ImintNFT = async function ({
                                              metadata
                                          }){
     try{
-
-        const NETWORK = clusterApiUrl(cluster)
+        //there is a problem with the mainnet-beta(https://api.mainnet-beta.solana.com): has been blocked by CORS policy
+        const NETWORK = cluster === 'mainnet-beta' ? 'https://solana-api.projectserum.com' : clusterApiUrl(cluster)
         const connection = new Connection(NETWORK,'confirmed')
 
 
