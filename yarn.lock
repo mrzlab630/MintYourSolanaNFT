@@ -241,6 +241,11 @@
   resolved "https://registry.yarnpkg.com/@josephg/resolvable/-/resolvable-1.0.1.tgz#69bc4db754d79e1a2f17a650d3466e038d94a5eb"
   integrity sha512-CtzORUwWTTOTqfVtHaKRJ0I1kNQd1bpn3sUh8I3nJDVY+5/M/Oe1DnEWzPQvqq/xPIIkzzzIP7mfCoAjFRvDhg==
 
+"@magicul/next-google-tag-manager@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@magicul/next-google-tag-manager/-/next-google-tag-manager-2.0.0.tgz#04a77b506a4385f84cf637267984bd6f334f5ce0"
+  integrity sha512-NXp0iGxdcAZL9IkkWwh2GS3dE1qSn4hGxXADnvt1li4gAXyxJ9AEDTrgqMVXIDzkGTD7Q0n37BJoCZdmwIXE+g==
+
 "@napi-rs/triples@^1.0.3":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@napi-rs/triples/-/triples-1.1.0.tgz#88c35b72e79a20b79bb4c9b3e2817241a1c9f4f9"

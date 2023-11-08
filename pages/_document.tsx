@@ -9,6 +9,7 @@
  */
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import {FacebookPixel, Gtag} from "../lib"
+import GoogleTagManager from '@magicul/next-google-tag-manager'
 
 
 class MyDocument extends Document {
@@ -22,6 +23,12 @@ class MyDocument extends Document {
                     }
                 </Head>
                 <body className={`body cr-white bg-blue`}>
+                    {
+                          /* Install Google Tag Manager  */
+                        process.env.NODE_ENV === 'production' && process.env.GOOGLE_ANALYTICS_TAG 
+                        ? <GoogleTagManager id={process.env.GOOGLE_ANALYTICS_TAG} /> 
+                        : null
+                    }                
                 <Main />
                 <NextScript />
                 </body>
